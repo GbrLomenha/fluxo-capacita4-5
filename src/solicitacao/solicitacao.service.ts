@@ -9,24 +9,31 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class SolicitacaoService {
   constructor( @InjectRepository(Solicitacao) private solicitacaoRepository: Repository<Solicitacao>) {}
 
-
-  create(createSolicitacaoDto: CreateSolicitacaoDto) {
-    return 'This action adds a new solicitacao';
+// Criar Solicitacao
+  createSolcitacao(createSolicitacaoDto: CreateSolicitacaoDto) {
+    const novaSolicitacao = this.solicitacaoRepository.create(createSolicitacaoDto);
+    return this.solicitacaoRepository.save(novaSolicitacao)
   }
-
-  findAll() {
-    return `This action returns all solicitacao`;
+// Vizualizar todas as solicitações
+  findAllSolicitacoes() {
+    return this.solicitacaoRepository.find();
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} solicitacao`;
+//Ver solicitação específica
+  findSolicitacaoById(id: number) {
+    return this.solicitacaoRepository.findOneBy({id});
   }
-
-  update(id: number, updateSolicitacaoDto: UpdateSolicitacaoDto) {
-    return `This action updates a #${id} solicitacao`;
+//Atualizar status de uma solicitação
+  async updateSolicitacaoStatus(id: number, status: string) {
+    const solicitacao = await this.findSolicitacaoById(id);
+    if (!solicitacao) {
+      throw new Error('Solicitação de suporte não encontrada');
+    }
+    solicitacao.status = status;
+    return this.solicitacaoRepository.save(solicitacao);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} solicitacao`;
+//Remover uma solicitação
+  async remove(id: number) {
+    const solicitacao = await this.findSolicitacaoById(id);
+    return this.solicitacaoRepository.delete(solicitacao)
   }
 }
