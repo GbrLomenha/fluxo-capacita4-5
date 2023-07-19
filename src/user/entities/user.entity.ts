@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Solicitacao } from "src/solicitacao/entities/solicitacao.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class User {
@@ -16,4 +17,7 @@ export class User {
     
     @Column()
     password: string;
+
+    @OneToMany(() => Solicitacao, (solicitacao) => solicitacao.user)
+    solicitacoes: Solicitacao[]
 }
