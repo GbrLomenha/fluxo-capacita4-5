@@ -12,6 +12,11 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @Get('email')
+  findOneBy(@Param('email') email: string) {
+    return this.userService.findOneByEmail(email);
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll();
@@ -19,7 +24,7 @@ export class UserController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return this.userService.findOneBy(+id);
   }
 
   @Patch(':id')
