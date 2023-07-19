@@ -7,8 +7,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SolicitacaoService {
-  constructor( @InjectRepository(Solicitacao) private solicitacaoRepository: Repository<Solicitacao>) {}
-
 
   create(createSolicitacaoDto: CreateSolicitacaoDto) {
     return 'This action adds a new solicitacao';
