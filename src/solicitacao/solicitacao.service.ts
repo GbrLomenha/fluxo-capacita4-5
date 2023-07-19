@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSolicitacaoDto } from './dto/create-solicitacao.dto';
 import { UpdateSolicitacaoDto } from './dto/update-solicitacao.dto';
+import { Solicitacao } from './entities/solicitacao.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SolicitacaoService {
+  constructor( @InjectRepository(Solicitacao) private solicitacaoRepository: Repository<Solicitacao>) {}
+
+
   create(createSolicitacaoDto: CreateSolicitacaoDto) {
     return 'This action adds a new solicitacao';
   }

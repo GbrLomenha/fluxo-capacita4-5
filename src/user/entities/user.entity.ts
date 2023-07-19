@@ -16,7 +16,7 @@ export class User {
     email: string;
     
     @Column()
-    password: string;
+    hashedPassword: string;
 
     @OneToMany(() => Solicitacao, (solicitacao) => solicitacao.user)
     solicitacoes: Solicitacao[]
