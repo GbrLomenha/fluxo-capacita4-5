@@ -4,17 +4,17 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 @Entity()
 export class Solicitacao {
     @PrimaryGeneratedColumn()
-    id: number;
+    id: number;   //Id da solicitacao
 
     @Column()
-    title: string;
+    title: string; //Titulo(Assunto) da solicitacao
 
     @Column()
-    content: string;
+    content: string; //Content da solicitacao
 
     @Column({ default: 'PENDING' })
-    status: string;
+    status: string;   //Status da solicitacao
 
     @ManyToOne(() => User, (user) => user.solicitacoes)
-    user: User;
+    user: User;       //Usuario que fez a Solicitacao
 }

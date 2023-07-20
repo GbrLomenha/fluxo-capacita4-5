@@ -14,14 +14,17 @@ export class SolicitacaoService {
     const novaSolicitacao = this.solicitacaoRepository.create(createSolicitacaoDto);
     return this.solicitacaoRepository.save(novaSolicitacao)
   }
+  
 // Vizualizar todas as solicitações
   findAllSolicitacoes() {
     return this.solicitacaoRepository.find();
   }
+
 //Ver solicitação específica
   findSolicitacaoById(id: number) {
     return this.solicitacaoRepository.findOneBy({id});
   }
+
 //Atualizar status de uma solicitação
   async updateSolicitacaoStatus(id: number, UpdateSolicitacaoDto: UpdateSolicitacaoDto) {
     const solicitacao = await this.findSolicitacaoById(id);
@@ -31,6 +34,7 @@ export class SolicitacaoService {
     solicitacao.status = UpdateSolicitacaoDto.status;
     return this.solicitacaoRepository.save(solicitacao);
   }
+
 //Remover uma solicitação
   async remove(id: number) {
     const solicitacao = await this.findSolicitacaoById(id);

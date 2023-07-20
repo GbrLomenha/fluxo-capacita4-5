@@ -5,5 +5,5 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class UpdateSolicitacaoDto extends PartialType(CreateSolicitacaoDto) {
     @IsString()
     @IsNotEmpty()
-    status: string
+    status: string //Atualiza apenas o Status da Solicitacao
 }

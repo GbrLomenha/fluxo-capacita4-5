@@ -7,27 +7,27 @@ import { UpdateSolicitacaoDto } from './dto/update-solicitacao.dto';
 export class SolicitacaoController {
   constructor(private readonly solicitacaoService: SolicitacaoService) {}
 
-  @Post()
+  @Post() //Cria uma nova solicitacao
   create(@Body() createSolicitacaoDto: CreateSolicitacaoDto) {
     return this.solicitacaoService.createSolcitacao(createSolicitacaoDto);
   }
 
-  @Get()
+  @Get() //Exibe todas as solicitações
   findAll() {
     return this.solicitacaoService.findAllSolicitacoes();
   }
 
-  @Get(':id')
+  @Get(':id') //Exibe uma solicitação expecífica
   findOne(@Param('id') id: string) {
     return this.solicitacaoService.findSolicitacaoById(+id);
   }
 
-  @Patch(':id')
+  @Patch(':id') //Atualiza uma solicitação com JSON
   update(@Param('id') id: string, @Body('status') UpdateSolicitacaoDto: UpdateSolicitacaoDto) {
     return this.solicitacaoService.updateSolicitacaoStatus(+id, UpdateSolicitacaoDto);
   }
 
-  @Delete(':id')
+  @Delete(':id') //Apaga uma solicitação
   remove(@Param('id') id: string) {
     return this.solicitacaoService.remove(+id);
   }
