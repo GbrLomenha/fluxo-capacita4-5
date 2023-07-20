@@ -7,9 +7,12 @@ export class Solicitacao {
     id: number;
 
     @Column()
-    content: string;
+    title: string;
 
     @Column()
+    content: string;
+
+    @Column({ default: 'PENDING' })
     status: string;
 
     @ManyToOne(() => User, (user) => user.solicitacoes)

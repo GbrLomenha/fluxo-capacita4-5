@@ -9,22 +9,22 @@ export class SolicitacaoController {
 
   @Post()
   create(@Body() createSolicitacaoDto: CreateSolicitacaoDto) {
-    return this.solicitacaoService.create(createSolicitacaoDto);
+    return this.solicitacaoService.createSolcitacao(createSolicitacaoDto);
   }
 
   @Get()
   findAll() {
-    return this.solicitacaoService.findAll();
+    return this.solicitacaoService.findAllSolicitacoes();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.solicitacaoService.findOne(+id);
+    return this.solicitacaoService.findSolicitacaoById(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSolicitacaoDto: UpdateSolicitacaoDto) {
-    return this.solicitacaoService.update(+id, updateSolicitacaoDto);
+  update(@Param('id') id: string, @Body('status') UpdateSolicitacaoDto: UpdateSolicitacaoDto) {
+    return this.solicitacaoService.updateSolicitacaoStatus(+id, UpdateSolicitacaoDto);
   }
 
   @Delete(':id')

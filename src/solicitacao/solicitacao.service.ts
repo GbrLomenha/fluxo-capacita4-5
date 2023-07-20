@@ -23,12 +23,12 @@ export class SolicitacaoService {
     return this.solicitacaoRepository.findOneBy({id});
   }
 //Atualizar status de uma solicitação
-  async updateSolicitacaoStatus(id: number, status: string) {
+  async updateSolicitacaoStatus(id: number, UpdateSolicitacaoDto: UpdateSolicitacaoDto) {
     const solicitacao = await this.findSolicitacaoById(id);
     if (!solicitacao) {
       throw new Error('Solicitação de suporte não encontrada');
     }
-    solicitacao.status = status;
+    solicitacao.status = UpdateSolicitacaoDto.status;
     return this.solicitacaoRepository.save(solicitacao);
   }
 //Remover uma solicitação
