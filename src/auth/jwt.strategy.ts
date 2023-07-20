@@ -6,13 +6,15 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
+    //Decocode token
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: 'chave', // Substitua pela sua chave secreta para verificar a autenticidade dos tokens
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), //Método para receber e extrair o token
+      ignoreExpiration: true, //Ignora o tempo de expiração do token
+      secretOrKey: 'chave', //Chave para comparação de autenticiadade do token extraido
     });
   }
 
+  //Verifica o conteúdo dentro do token (payload)
   async validate(payload: any) {
     // Aqui, você pode implementar a lógica para verificar se o usuário associado ao token existe no sistema
     // e retornar os dados do usuário, se necessário. Por exemplo, consultar o banco de dados com o ID do usuário (payload.sub).
