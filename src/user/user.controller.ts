@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Injectable } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RolesGuard } from 'src/auth/guards/roles.guards.ts'
 
+@Injectable()
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -27,12 +29,14 @@ export class UserController {
 
   //Atualiza um usuario
   @Patch(':id')
+  @Role('admin')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
 
   //Remove um usuario
   @Delete(':id')
+  @Role('admin')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
