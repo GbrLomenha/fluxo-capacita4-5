@@ -24,7 +24,6 @@ export class UserController {
   //Cria um novo usuario
   @Post('admin')
   @UseGuards()
-  @Role('admin')
   createAdmin(@Body() createAdminDto: CreateAdminDto) {
     return this.userService.createAdmin(createAdminDto);
   }
