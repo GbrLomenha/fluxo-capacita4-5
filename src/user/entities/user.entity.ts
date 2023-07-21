@@ -6,7 +6,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ default: 'client' })
+    @Column()
     role: string;
 
     @Column()
@@ -16,7 +16,7 @@ export class User {
     email: string;
     
     @Column()
-    hashedPassword: string;
+    password: string;
 
     @OneToMany(() => Solicitacao, (solicitacao) => solicitacao.user)
     solicitacoes: Solicitacao[]

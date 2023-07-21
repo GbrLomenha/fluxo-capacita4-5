@@ -10,9 +10,6 @@ import { CreateAdminDto } from './dto/create-admin.dto';
 
 @Injectable()
 export class UserService {
-  findOneBy(email: string) {
-    throw new Error('Method not implemented.');
-  }
   constructor( @InjectRepository(User) private userRepository: Repository<User>) {}
 
   //Cria novo Usuário

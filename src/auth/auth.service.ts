@@ -20,7 +20,7 @@ export class AuthService{
 
       //Verificação se o usuada existe e se a senha está correta
       //bcript faz a comparação da senha na dto com a senha hasheada no db
-      if (!user || !(await bcrypt.compare(loginDto.password, user.hashedPassword))){
+      if (!user || !(await bcrypt.compare(loginDto.password, user.password))){
         throw new UnauthorizedException('Invalid login'); 
       }
 
