@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { CreateAdminDto } from './dto/create-admin.dto';
 
 
 @Injectable()
@@ -17,12 +18,25 @@ export class UserService {
   //Cria novo Usuário
   async create(createUserDto: CreateUserDto){
     const hashed_password = await this.hashPassword(createUserDto.password); //Hasheia a senha cadastrada
+
     createUserDto.password = hashed_password  //reatribui a senha hasheada a dto
 
     const newUser = this.userRepository.create({...createUserDto,}) //Cria o novo usuário
 
     return this.userRepository.save(newUser); //Salva
   }
+
+  //Cria novo Administrator
+  async createAdmin(createAdminDto: CreateAdminDto){
+    const hashed_password = await this.hashPassword(createAdminDto.password); //Hasheia a senha cadastrada
+    
+    createAdminDto.password = hashed_password  //reatribui a senha hasheada a dto
+
+    const newUser = this.userRepository.create({...createAdminDto,}) //Cria o novo usuário
+
+    return this.userRepository.save(newUser); //Salva
+  }
+
 
   //Exibe um usuáro pelo email
   findOneByEmail(email: string){ //Senha rasheada, não é necessario oculta-la

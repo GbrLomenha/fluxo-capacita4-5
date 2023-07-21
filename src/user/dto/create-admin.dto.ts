@@ -1,6 +1,10 @@
 import { IsString, IsNotEmpty, IsEmail } from "class-validator";
 
-export class CreateUserDto {
+export class CreateAdminDto {
+// Role do usuário
+    @IsString()
+    @IsNotEmpty()
+    type: string; 
 //Nome do usuario
     @IsString()
     @IsNotEmpty()

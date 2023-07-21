@@ -1,14 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SolicitacaoService } from './solicitacao.service';
 import { CreateSolicitacaoDto } from './dto/create-solicitacao.dto';
 import { UpdateSolicitacaoDto } from './dto/update-solicitacao.dto';
-import { RolesGuard } from 'src/auth/guards/roles.guards.ts'
+import { RolesGuard } from 'src/auth/guards/roles.guards'
+import { Role } from 'src/auth/guards/roles.decorator';
 
 @Controller('solicitacao')
 export class SolicitacaoController {
   constructor(private readonly solicitacaoService: SolicitacaoService) {}
 
   @Post() //Cria uma nova solicitacao
+  @UseGuards()
   @Role('client')
   create(@Body() createSolicitacaoDto: CreateSolicitacaoDto) {
     return this.solicitacaoService.createSolcitacao(createSolicitacaoDto);
@@ -25,13 +27,15 @@ export class SolicitacaoController {
   }
 
   @Patch(':id') //Atualiza uma solicitação com JSON
+  @UseGuards()
   @Role('admin')
   update(@Param('id') id: string, @Body('status') UpdateSolicitacaoDto: UpdateSolicitacaoDto) {
     return this.solicitacaoService.updateSolicitacaoStatus(+id, UpdateSolicitacaoDto);
   }
 
   @Delete(':id') //Apaga uma solicitação
-  @Role('client')
+  @UseGuards()
+  @Role('admin')
   remove(@Param('id') id: string) {
     return this.solicitacaoService.remove(+id);
   }
